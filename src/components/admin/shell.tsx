@@ -94,6 +94,7 @@ export function PageHeader({
 const savedCopy: Record<string, string> = {
   "1": "Saved.",
   photo: "Photo updated.",
+  icon: "Photo removed.",
   cv: "CV uploaded.",
 };
 

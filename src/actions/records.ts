@@ -122,6 +122,24 @@ export async function saveProject(_prev: ActionState, formData: FormData): Promi
   redirect(`/admin/projects/${saved.id}?saved=1`);
 }
 
+export async function removeProjectImage(formData: FormData) {
+  await guard();
+  const idResult = readId(formData);
+  if (!idResult.id) return;
+  const project = await prisma.project.findUnique({
+    where: { id: idResult.id },
+    select: { id: true, imageId: true },
+  });
+  if (!project) return;
+  if (project.imageId) {
+    await prisma.project.update({ where: { id: project.id }, data: { imageId: null } });
+    await releaseMedia(project.imageId);
+    await touch();
+    revalidatePortfolio();
+  }
+  redirect(`/admin/projects/${project.id}?saved=icon`);
+}
+
 export async function moveProject(formData: FormData) {
   await guard();
   const idResult = readId(formData);

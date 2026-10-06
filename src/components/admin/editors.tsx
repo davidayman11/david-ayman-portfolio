@@ -3,6 +3,7 @@ import {
   saveCertification,
   saveEducation,
   saveExperience,
+  removeProjectImage,
   saveProject,
   saveSkill,
 } from "@/actions/records";
@@ -81,6 +82,9 @@ export function ProjectEditor({
       action={saveProject}
       hidden={project ? { id: project.id } : undefined}
       previewFrame="icon"
+      removeImage={
+        project?.imageId ? { action: removeProjectImage, id: project.id } : undefined
+      }
       preview={
         project?.imageId
           ? { src: mediaPath(project.imageId) ?? "", alt: `${project.name} icon` }
@@ -108,7 +112,7 @@ export function ProjectEditor({
           label: "App icon",
           type: "file",
           accept: "image/jpeg,image/png,image/webp",
-          hint: "JPEG, PNG, or WebP. 4 MB maximum. Leave empty to keep the current icon.",
+          hint: "JPEG, PNG, or WebP. 4 MB maximum. Leave empty to keep the current photo.",
         },
         { name: "name", label: "Project name", required: true },
         { name: "period", label: "Dates", required: true },
@@ -120,7 +124,12 @@ export function ProjectEditor({
         { name: "functionality", label: "What it does", type: "textarea", rows: 6, hint: lineHint },
         { name: "technologies", label: "Technologies", type: "textarea", rows: 4, hint: lineHint },
         { name: "projectUrl", label: "Project link", type: "url" },
-        { name: "githubUrl", label: "GitHub link", type: "url" },
+        {
+          name: "githubUrl",
+          label: "GitHub link",
+          type: "url",
+          hint: "Shown as a GitHub icon when this is filled in.",
+        },
         {
           name: "appleUrl",
           label: "App Store link",
