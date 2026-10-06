@@ -8,7 +8,6 @@ export function About() {
       index="01"
       eyebrow="Profile"
       title="Mobile products, built as software."
-      intro="Flutter first, with a backend foundation in Laravel. The through-line is a product someone can actually operate."
     >
       <div className="rise space-y-5 text-[17px] leading-relaxed text-ink-soft">
         {about.paragraphs.map((paragraph) => (

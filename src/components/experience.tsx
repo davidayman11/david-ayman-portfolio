@@ -8,7 +8,7 @@ export function Experience() {
       index="02"
       eyebrow="Experience"
       title="Product work, and a season in procurement."
-      intro="Mobile engineering at Pay Band Solutions is the current role. The Majid Al Futtaim internship was sourcing work with the procurement team."
+      intro="Mobile engineering at PayBand Solutions is the current role. The Majid Al Futtaim internship was sourcing work with the procurement team."
     >
       <ol className="border-t border-line">
         {experience.map((item) => (

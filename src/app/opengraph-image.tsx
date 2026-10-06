@@ -55,7 +55,7 @@ export default function OpenGraphImage() {
           </div>
         </div>
         <div style={{ display: "flex", fontSize: 22, color: "#5c615b" }}>
-          Cairo · Pay Band Solutions
+          Cairo · PayBand Solutions
         </div>
       </div>
     ),

@@ -37,8 +37,8 @@ export const nav = [
 export const heroFacts = [
   {
     label: "Now",
-    value: "Pay Band Solutions",
-    detail: "Part-time software developer",
+    value: "PayBand Solutions",
+    detail: "Part-time software engineer",
   },
   {
     label: "Focus",
@@ -54,15 +54,15 @@ export const heroFacts = [
 
 export const about = {
   paragraphs: [
-    "I am a software engineer in Cairo. I build mobile products in Flutter and Dart: Bloc and Cubit for state, REST APIs or Firebase for data, and Clean Architecture when the product has to keep growing.",
-    "The work is operational. Booking, food orders, warehouse stock, scout attendance, and hospital workflows. I am a part-time software developer at Pay Band Solutions, and I am completing a computer science degree on the Mobile Development track at the Higher Technological Institute.",
-    "A back-end diploma in PHP and Laravel sits under the mobile work: authentication, MySQL, MVC, and deployment. I used that foundation for a scout reservation site that generates a QR code and delivers it over WhatsApp.",
+    "I’m a Software Engineer based in Cairo, specializing in building mobile applications with Flutter and Dart. I work with Bloc/Cubit, REST APIs, Firebase, and Clean Architecture to build scalable, reliable products.",
+    "I currently work as a Part-Time Software Engineer at PayBand Solutions while pursuing a Computer Science degree focused on Mobile Development at the Higher Technological Institute.",
+    "My experience spans real-world products across education, food, healthcare, transportation, and warehouse management. I also have a back-end foundation in PHP and Laravel, giving me a broader understanding of how complete products are built from backend to mobile.",
   ],
   notes: [
-    { label: "Degree", value: "Computer Science, in progress" },
-    { label: "Track", value: "Mobile Development" },
-    { label: "Since", value: "2022" },
-    { label: "Current team", value: "Pay Band Solutions" },
+    { label: "Role", value: "Software Engineer" },
+    { label: "Focus", value: "Mobile Development" },
+    { label: "Based", value: "Cairo" },
+    { label: "Current team", value: "PayBand Solutions" },
   ],
 } as const;
 
@@ -79,8 +79,8 @@ export type ExperienceItem = {
 
 export const experience: ExperienceItem[] = [
   {
-    role: "Part-time Software Developer",
-    company: "Pay Band Solutions",
+    role: "Part-time Software Engineer",
+    company: "PayBand Solutions",
     period: "Mar 2026 — Present",
     current: true,
     summary:
@@ -163,12 +163,6 @@ export const projects: Project[] = [
     ],
     stack: ["Flutter", "Dart", "REST APIs", "Figma"],
     featured: true,
-    links: [
-      {
-        label: "View code",
-        href: "https://github.com/davidayman11/luciz",
-      },
-    ],
   },
   {
     name: "Hospital Management System",
@@ -368,7 +362,7 @@ export const education = [
     place: "Higher Technological Institute",
     location: "Cairo, Egypt",
     detail:
-      "Faculty of Computer Science, Mobile Development track. Still in progress.",
+      "Faculty of Computer Science, Mobile Development track.",
   },
   {
     period: "Jun 2024 — Nov 2024",
