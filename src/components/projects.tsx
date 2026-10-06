@@ -3,11 +3,11 @@ import { Section } from "@/components/section";
 
 function AppIcon({ src, name }: { src: string | null; name: string }) {
   return (
-    <div className="size-16 shrink-0 overflow-hidden border border-line bg-paper-deep">
+    <div className="size-28 shrink-0 overflow-hidden border border-line bg-paper-deep sm:size-32">
       {src ? (
         <img src={src} alt={`${name} app icon`} className="size-full object-cover" />
       ) : (
-        <div className="flex size-full items-center justify-center px-1 text-center font-mono text-[9px] uppercase leading-tight tracking-[0.12em] text-mute">
+        <div className="flex size-full items-center justify-center px-2 text-center font-mono text-[10px] uppercase leading-tight tracking-[0.14em] text-mute">
           App icon
         </div>
       )}
@@ -17,44 +17,64 @@ function AppIcon({ src, name }: { src: string | null; name: string }) {
 
 function AppleMark() {
   return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" className="size-4 fill-current">
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="size-6 fill-current">
       <path d="M16.37 12.72c.02 2.18 1.91 2.9 1.93 2.91-.02.05-.3 1.03-.99 2.04-.6.87-1.22 1.74-2.2 1.76-.96.02-1.27-.57-2.37-.57s-1.45.55-2.36.59c-.94.04-1.66-.94-2.26-1.81-1.23-1.78-2.17-5.03-.91-7.23.63-1.09 1.75-1.78 2.97-1.8.93-.02 1.8.62 2.37.62.57 0 1.64-.77 2.76-.66.47.02 1.79.19 2.64 1.43-.07.04-1.57.92-1.58 2.72zM14.7 6.7c.5-.6.84-1.44.75-2.28-.72.03-1.6.48-2.12 1.08-.46.54-.87 1.4-.76 2.22.81.06 1.64-.41 2.13-1.02z" />
     </svg>
   );
 }
 
-function PlayMark() {
+function AndroidMark() {
   return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" className="size-4 fill-current">
-      <path d="M4.5 3.8v16.4c0 .7.8 1.1 1.4.7l12.2-8.2c.5-.4.5-1.1 0-1.5L5.9 3.1c-.6-.4-1.4 0-1.4.7z" />
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="size-6 fill-current">
+      <path d="M17.6 9.48 19.44 6.3c.16-.31.04-.69-.26-.85-.29-.15-.65-.06-.83.22l-1.88 3.24c-2.86-1.21-6.08-1.21-8.94 0L5.65 5.67c-.19-.29-.58-.38-.87-.2-.28.18-.37.54-.22.83L6.4 9.48C3.3 11.25 1.28 14.44 1 18h22c-.28-3.56-2.3-6.75-5.4-8.52zM7 15.25c-.69 0-1.25-.56-1.25-1.25S6.31 12.75 7 12.75s1.25.56 1.25 1.25-.56 1.25-1.25 1.25zm10 0c-.69 0-1.25-.56-1.25-1.25s.56-1.25 1.25-1.25 1.25.56 1.25 1.25-.56 1.25-1.25 1.25z" />
     </svg>
   );
 }
 
-function StoreLinks({ appleUrl, androidUrl }: { appleUrl: string; androidUrl: string }) {
-  if (!appleUrl && !androidUrl) return null;
+function ProjectLinks({
+  project,
+}: {
+  project: Pick<Portfolio["projects"][number], "appleUrl" | "androidUrl" | "projectUrl" | "githubUrl">;
+}) {
+  const textLinks = [
+    project.projectUrl ? { href: project.projectUrl, label: "Project" } : null,
+    project.githubUrl ? { href: project.githubUrl, label: "GitHub" } : null,
+  ].filter((link) => link !== null);
 
-  const itemClass =
-    "inline-flex size-11 items-center justify-center border border-line text-ink transition-colors hover:border-ink";
+  if (!project.appleUrl && !project.androidUrl && textLinks.length === 0) return null;
+
+  const iconClass =
+    "inline-flex size-12 items-center justify-center border border-line text-ink transition-colors hover:border-ink";
 
   return (
-    <div className="mt-4 flex gap-2">
-      {appleUrl ? (
-        <a href={appleUrl} target="_blank" rel="noopener noreferrer" aria-label="App Store" className={itemClass}>
+    <div className="mt-5 flex flex-wrap items-center gap-2">
+      {project.appleUrl ? (
+        <a href={project.appleUrl} target="_blank" rel="noopener noreferrer" aria-label="App Store" className={iconClass}>
           <AppleMark />
         </a>
       ) : null}
-      {androidUrl ? (
+      {project.androidUrl ? (
         <a
-          href={androidUrl}
+          href={project.androidUrl}
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Google Play"
-          className={itemClass}
+          className={iconClass}
         >
-          <PlayMark />
+          <AndroidMark />
         </a>
       ) : null}
+      {textLinks.map((link) => (
+        <a
+          key={link.label}
+          href={link.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex h-12 items-center border border-line px-3.5 font-mono text-[11px] uppercase tracking-[0.16em] text-ink transition-colors hover:border-ink"
+        >
+          {link.label}
+        </a>
+      ))}
     </div>
   );
 }
@@ -71,18 +91,18 @@ function ProjectArticle({
   if (!project.featured) {
     return (
       <article className="rise grid gap-5 border-t border-line py-8 lg:grid-cols-12 lg:gap-12">
-        <div className="lg:col-span-4">
-          <div className="flex items-start gap-4">
+        <div className="lg:col-span-5">
+          <p className="font-mono text-[11px] tracking-[0.16em] text-mute">
+            {number}
+            <span className="px-2" aria-hidden>
+              —
+            </span>
+            {project.period}
+          </p>
+          <div className="mt-4 flex items-start gap-4">
             <AppIcon src={project.imageUrl} name={project.name} />
-            <div>
-              <p className="font-mono text-[11px] tracking-[0.16em] text-mute">
-                {number}
-                <span className="px-2" aria-hidden>
-                  —
-                </span>
-                {project.period}
-              </p>
-              <h3 className="mt-3 font-serif text-3xl tracking-[-0.03em]">{project.name}</h3>
+            <div className="min-w-0">
+              <h3 className="font-serif text-3xl tracking-[-0.03em]">{project.name}</h3>
               <p className="mt-2 text-sm text-mute">
                 {project.kind}
                 <span className="px-2 text-line-strong" aria-hidden>
@@ -92,9 +112,9 @@ function ProjectArticle({
               </p>
             </div>
           </div>
-          <StoreLinks appleUrl={project.appleUrl} androidUrl={project.androidUrl} />
+          <ProjectLinks project={project} />
         </div>
-        <div className="lg:col-span-8">
+        <div className="lg:col-span-7">
           <p className="leading-relaxed text-ink">{project.summary}</p>
           {project.problem || project.contribution ? (
             <p className="mt-3 text-[15px] leading-relaxed text-ink-soft">
@@ -128,22 +148,22 @@ function ProjectArticle({
   return (
     <article className="rise border-t border-line py-10 md:py-14">
       <div className="grid gap-8 lg:grid-cols-12 lg:gap-12">
-        <div className="lg:col-span-4">
-          <div className="flex items-start gap-4">
+        <div className="lg:col-span-5">
+          <p className="font-mono text-[11px] tracking-[0.18em] text-mute">
+            {number}
+            <span className="px-2" aria-hidden>
+              —
+            </span>
+            {project.period}
+          </p>
+          <div className="mt-4 flex items-start gap-4">
             <AppIcon src={project.imageUrl} name={project.name} />
-            <div>
-              <p className="font-mono text-[11px] tracking-[0.18em] text-mute">
-                {number}
-                <span className="px-2" aria-hidden>
-                  —
-                </span>
-                {project.period}
-              </p>
-              <h3 className="mt-4 font-serif text-4xl tracking-[-0.03em] md:text-[2.75rem]">{project.name}</h3>
+            <div className="min-w-0">
+              <h3 className="font-serif text-4xl tracking-[-0.03em] md:text-[2.75rem]">{project.name}</h3>
               <p className="mt-3 text-sm text-mute">{project.kind}</p>
             </div>
           </div>
-          <StoreLinks appleUrl={project.appleUrl} androidUrl={project.androidUrl} />
+          <ProjectLinks project={project} />
 
           <dl className="mt-8 space-y-4 text-sm">
             <div>
@@ -166,7 +186,7 @@ function ProjectArticle({
           ) : null}
         </div>
 
-        <div className="lg:col-span-8">
+        <div className="lg:col-span-7">
           <p className="text-lg leading-relaxed text-ink">{project.summary}</p>
           <div className="mt-8 grid gap-8 sm:grid-cols-2">
             {project.problem ? (

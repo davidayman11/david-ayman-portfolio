@@ -131,7 +131,7 @@ export function ProjectEditor({
           name: "androidUrl",
           label: "Google Play link",
           type: "url",
-          hint: "Shown as a Play icon when this is filled in.",
+          hint: "Shown as an Android icon when this is filled in.",
         },
         { name: "featured", label: "Featured project", type: "checkbox" },
       ]}
