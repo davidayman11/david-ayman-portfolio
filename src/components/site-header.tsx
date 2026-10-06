@@ -1,9 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { nav, profile } from "@/lib/content";
 
-export function SiteHeader() {
+export function SiteHeader({
+  shortName,
+  cvHref,
+  nav,
+}: {
+  shortName: string;
+  cvHref: string | null;
+  nav: { href: string; label: string }[];
+}) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -25,34 +32,26 @@ export function SiteHeader() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-line bg-paper">
       <div className="mx-auto flex h-16 w-full max-w-[72rem] items-center justify-between px-5 sm:h-[4.5rem] sm:px-8">
-        <a
-          href="#top"
-          className="font-serif text-lg tracking-[-0.03em] text-ink"
-          onClick={() => setOpen(false)}
-        >
-          {profile.shortName}
+        <a href="#top" className="font-serif text-lg tracking-[-0.03em] text-ink" onClick={() => setOpen(false)}>
+          {shortName}
         </a>
-
         <nav className="hidden items-center gap-7 md:flex" aria-label="Primary">
           {nav.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              className="text-[13px] text-ink-soft transition-colors hover:text-ink"
-            >
+            <a key={item.href} href={item.href} className="text-[13px] text-ink-soft transition-colors hover:text-ink">
               {item.label}
             </a>
           ))}
-          <a
-            href={profile.cvPath}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="border border-ink px-3 py-1.5 text-[13px] text-ink transition-colors hover:bg-ink hover:text-paper"
-          >
-            CV
-          </a>
+          {cvHref ? (
+            <a
+              href={cvHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="border border-ink px-3 py-1.5 text-[13px] text-ink transition-colors hover:bg-ink hover:text-paper"
+            >
+              CV
+            </a>
+          ) : null}
         </nav>
-
         <button
           type="button"
           className="inline-flex h-11 items-center px-1 text-[13px] tracking-[0.14em] uppercase md:hidden"
@@ -63,13 +62,8 @@ export function SiteHeader() {
           {open ? "Close" : "Menu"}
         </button>
       </div>
-
       {open ? (
-        <nav
-          id="mobile-nav"
-          className="border-t border-line bg-paper px-5 py-6 md:hidden"
-          aria-label="Mobile"
-        >
+        <nav id="mobile-nav" className="border-t border-line bg-paper px-5 py-6 md:hidden" aria-label="Mobile">
           <ul className="flex flex-col">
             {nav.map((item) => (
               <li key={item.href} className="border-b border-line">
@@ -82,17 +76,19 @@ export function SiteHeader() {
                 </a>
               </li>
             ))}
-            <li className="pt-5">
-              <a
-                href={profile.cvPath}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex min-h-11 items-center border border-ink px-4 text-sm"
-                onClick={() => setOpen(false)}
-              >
-                View CV
-              </a>
-            </li>
+            {cvHref ? (
+              <li className="pt-5">
+                <a
+                  href={cvHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex min-h-11 items-center border border-ink px-4 text-sm"
+                  onClick={() => setOpen(false)}
+                >
+                  View CV
+                </a>
+              </li>
+            ) : null}
           </ul>
         </nav>
       ) : null}

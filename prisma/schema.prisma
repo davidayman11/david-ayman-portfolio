@@ -1,0 +1,191 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id             String    @id @default(cuid())
+  email          String    @unique
+  passwordHash   String
+  failedAttempts Int       @default(0)
+  lockedUntil    DateTime?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+}
+
+model Media {
+  id        String   @id @default(cuid())
+  filename  String
+  mimeType  String
+  bytes     Bytes
+  size      Int
+  createdAt DateTime @default(now())
+}
+
+model Profile {
+  id            String   @id @default("default")
+  name          String
+  shortName     String
+  jobTitle      String
+  focus         String
+  shortBio      String
+  longBio       String
+  location      String
+  email         String
+  phoneDisplay  String
+  phoneHref     String
+  linkedinUrl   String   @default("")
+  linkedinLabel String   @default("")
+  githubUrl     String   @default("")
+  githubLabel   String   @default("")
+  websiteUrl    String   @default("")
+  websiteLabel  String   @default("")
+  imageId       String?
+  resumeId      String?
+  updatedAt     DateTime @updatedAt
+}
+
+model Hero {
+  id                String   @id @default("default")
+  headingLine1      String
+  headingLine2      String
+  subheading        String
+  primaryCtaLabel   String
+  primaryCtaHref    String
+  secondaryCtaLabel String
+  secondaryCtaHref  String
+  imageId           String?
+  portraitPosition  Int      @default(18)
+  fact1Label        String   @default("")
+  fact1Value        String   @default("")
+  fact1Detail       String   @default("")
+  fact2Label        String   @default("")
+  fact2Value        String   @default("")
+  fact2Detail       String   @default("")
+  fact3Label        String   @default("")
+  fact3Value        String   @default("")
+  fact3Detail       String   @default("")
+  updatedAt         DateTime @updatedAt
+}
+
+model About {
+  id         String   @id @default("default")
+  highlights Json
+  updatedAt  DateTime @updatedAt
+}
+
+model Section {
+  key     String @id
+  eyebrow String
+  title   String
+  intro   String @default("")
+  extra   String @default("")
+}
+
+model Experience {
+  id           String   @id @default(cuid())
+  company      String
+  position     String
+  location     String   @default("")
+  dates        String
+  current      Boolean  @default(false)
+  description  String
+  technologies String[]
+  achievements String[]
+  sortOrder    Int
+  updatedAt    DateTime @updatedAt
+
+  @@index([sortOrder])
+}
+
+model Skill {
+  id        String   @id @default(cuid())
+  name      String
+  category  String
+  icon      String   @default("")
+  sortOrder Int
+  updatedAt DateTime @updatedAt
+
+  @@index([category, sortOrder])
+}
+
+model Project {
+  id            String   @id @default(cuid())
+  name          String
+  period        String
+  kind          String
+  role          String
+  summary       String
+  problem       String   @default("")
+  contribution  String   @default("")
+  functionality String[]
+  technologies  String[]
+  imageId       String?
+  projectUrl    String   @default("")
+  githubUrl     String   @default("")
+  androidUrl    String   @default("")
+  appleUrl      String   @default("")
+  featured      Boolean  @default(false)
+  sortOrder     Int
+  updatedAt     DateTime @updatedAt
+
+  @@index([featured, sortOrder])
+}
+
+model Education {
+  id          String   @id @default(cuid())
+  institution String
+  degree      String
+  dates       String
+  location    String   @default("")
+  description String
+  sortOrder   Int
+  updatedAt   DateTime @updatedAt
+
+  @@index([sortOrder])
+}
+
+model Certification {
+  id        String   @id @default(cuid())
+  name      String
+  issuer    String
+  date      String
+  link      String   @default("")
+  sortOrder Int
+  updatedAt DateTime @updatedAt
+
+  @@index([sortOrder])
+}
+
+model ApproachItem {
+  id        String   @id @default(cuid())
+  title     String
+  body      String
+  sortOrder Int
+  updatedAt DateTime @updatedAt
+
+  @@index([sortOrder])
+}
+
+model Seo {
+  id              String   @id @default("default")
+  metaTitle       String
+  metaDescription String
+  ogImageId       String?
+  updatedAt       DateTime @updatedAt
+}
+
+model SiteSettings {
+  id                String   @id @default("default")
+  footerText        String
+  navItems          Json
+  paperColor        String   @default("#efece4")
+  inkColor          String   @default("#171a17")
+  signalColor       String   @default("#1f6b45")
+  lastContentUpdate DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}

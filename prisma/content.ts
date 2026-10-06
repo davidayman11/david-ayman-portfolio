@@ -1,7 +1,6 @@
 /**
- * Portfolio content. Edit this file to update the site.
- * Facts follow David Ayman Mahrous's CV. Do not add roles,
- * projects, or metrics that are not listed there.
+ * Initial portfolio content for the database seed.
+ * After seeding, edit the live site from the admin dashboard.
  */
 
 export const profile = {
