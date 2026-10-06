@@ -20,9 +20,9 @@ export function Hero() {
               <span className="block italic text-ink-soft">Mahrous</span>
             </h1>
             <p className="mt-8 max-w-xl text-lg leading-relaxed text-ink-soft sm:text-xl">
-              I build Flutter products for work that happens on a phone: booking
-              an activity, placing a food order, tracking warehouse stock,
-              recording attendance, and running a hospital day.
+              I develop Flutter products that streamline real-world operations,
+              including booking platforms, food ordering systems, warehouse
+              management, attendance solutions, and healthcare applications.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <a
